@@ -1,21 +1,21 @@
 {
-  "name": "phymer",
+  "name": "rhymer",
   "version": "1.0.0",
   "description": "A JavaScript сlass for finding rhymes to words.",
-  "main": "phymer.js",
+  "main": "rhymer.js",
   "scripts": {
     "test": "jest"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jzavorohina/phymer-js.git"
+    "url": "https://github.com/jzavorohina/rhymer-js.git"
   },
   "author": "Julia Zavorohina",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jzavorohina/phymer-js/issues"
+    "url": "https://github.com/jzavorohina/rhymer-js/issues"
   },
-  "homepage": "https://github.com/jzavorohina/phymer-js#readme",
+  "homepage": "https://github.com/jzavorohina/rhymer-js#readme",
   "directories": {
     "test": "tests"
   },
