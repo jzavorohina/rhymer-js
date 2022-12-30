@@ -56,3 +56,16 @@ test('Check that original word is not in result', () => {
     expect(resultByStart).not.toContain(input);
     expect(resultByEnd).not.toContain(input);
 });
+
+test('Check for invalid input', () => {
+    expect(Rhymer.findByStart('')).toHaveLength(0);
+    expect(Rhymer.findByStart(' ')).toHaveLength(0);
+    expect(Rhymer.findByStart(' а ')).toHaveLength(0);
+    expect(Rhymer.findByStart(' а б в ')).toHaveLength(0);
+    expect(Rhymer.findByStart('!"№;%:?*(){}[]_+\/')).toHaveLength(0);
+    expect(Rhymer.findByStart(null)).toHaveLength(0);
+    expect(Rhymer.findByStart(false)).toHaveLength(0);
+    expect(Rhymer.findByStart(undefined)).toHaveLength(0);
+    expect(Rhymer.findByStart([])).toHaveLength(0);
+    expect(Rhymer.findByStart({})).toHaveLength(0);
+});

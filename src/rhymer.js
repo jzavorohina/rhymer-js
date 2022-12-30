@@ -1,8 +1,7 @@
-//////////////
-// Rhymer //
-////////////
 /**
- * Rhymer
+ * /////////////
+ * // Rhymer //
+ * ///////////
  * 
  * A JavaScript lib for finding rhymes to words.
  * 
@@ -15,7 +14,6 @@
  * Rhymer.findByEnd('Key word'); // return: array
  * 
  * @author jzavorohina@yandex.ru
- * @version 1.0.0
  * 
  */
 
@@ -56,17 +54,27 @@ class Rhymer {
         return Rhymer.find(string, true);
     }
 
-    static find(string, end = true) { 
+    static find(string, end = true) {
+        if (!string || typeof string !== 'string') {
+            return [];
+        }
+
+        var inputString = string.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+
+        if (inputString.length < 1) {
+            return [];
+        }
+
         var result = [];
-        var parsed = Rhymer.parseString(string);
+        var parsed = Rhymer.parseString(inputString);
         var pattern = Rhymer.getRegExp(parsed, 2, end);
 
-        var wordsBase = fsLibrary.readFileSync('src/wordsBase.txt', {encoding:'utf8', flag:'r'});
+        var wordsBase = fsLibrary.readFileSync(__dirname + '/wordsBase.txt', {encoding:'utf8', flag:'r'});
         var words = wordsBase.split("\n");
 
         for (var word of words) {
             var trimmed = word.trim();
-            if (pattern.test(trimmed) && trimmed.toLowerCase() !== string.toLowerCase()) {
+            if (pattern.test(trimmed) && trimmed.toLowerCase() !== inputString.toLowerCase()) {
                 result.push(trimmed);
             }
         }
@@ -107,6 +115,10 @@ class Rhymer {
         var stringByGroupIds = {};
         var strLen = Rhymer.mbStrlen(string);
         var symbols = string.split('');
+
+        if (symbols.length < 1) {
+            return [];
+        }
 
         for (var key = 0; key < symbols.length; key++) {
             var word = symbols[key];
@@ -154,14 +166,8 @@ class Rhymer {
         return !isNaN(value - parseFloat(value));
     }
 
-
 }
 
 module.exports = {
     Rhymer
 };
-
-var test = "география";
-//Rhymer.find(test);
-//console.log (Rhymer.parseString(test));
-console.log (Rhymer.findByStart(test));
